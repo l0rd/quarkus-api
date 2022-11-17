@@ -88,21 +88,15 @@ commands:
         podman build -f src/main/docker/Dockerfile.jvm -t "${IMAGE}" .
       group:
         kind: build
-  - id: loginlocalregistry
-    exec:
-      label: "Login to local OpenShift registry"
-      component: tools
-      workingDir: ${PROJECT_SOURCE}
-      commandLine: "podman login --tls-verify=false -u kubeadmin -p $(oc whoami -t) image-registry.openshift-image-registry.svc:5000"
-      group:
-        kind: run
   - id: pushimage
     exec:
       label: "Push Image"
       component: tools
       workingDir: ${PROJECT_SOURCE}
       commandLine: |
+        # Requires `oc policy add-role-to-user registry-editor <user_name>`
         IMAGE=image-registry.openshift-image-registry.svc:5000/$(kubectl get sa default -o json | jq -r '.metadata.namespace')/quarkus-api-example
+        podman login --tls-verify=false -u $(oc whoami) -p $(oc whoami -t) image-registry.openshift-image-registry.svc:5000
         podman push --tls-verify=false "${IMAGE}"
       group:
         kind: build
