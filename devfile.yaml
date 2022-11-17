@@ -16,12 +16,17 @@ components:
           name: debug
           protocol: tcp
           targetPort: 5005
+        - exposure: none
+          name: test
+          protocol: tcp
+          targetPort: 1593
         - exposure: public
           name: list-all-food
           protocol: http
           targetPort: 8080
           path: /food
       memoryLimit: 6G
+      cpuLimit: 1500m
       mountSources: true
 
   - name: ubi-minimal
