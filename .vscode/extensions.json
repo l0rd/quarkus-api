@@ -5,6 +5,7 @@
       "redhat.vscode-quarkus",
       "vscjava.vscode-java-test",
       "github.vscode-pull-request-github",
-      "genuitecllc.codetogether"
+      "genuitecllc.codetogether",
+      "redhat.vscode-yaml"
     ]
 }
