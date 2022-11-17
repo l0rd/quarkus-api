@@ -83,7 +83,9 @@ commands:
       label: "Build Image"
       component: tools
       workingDir: ${PROJECT_SOURCE}
-      commandLine: "podman build -f src/main/docker/Dockerfile.jvm -t image-registry.openshift-image-registry.svc:5000/openshift/quarkus-api-example ."
+      commandLine: |
+        IMAGE=image-registry.openshift-image-registry.svc:5000/$(kubectl get sa default -o json | jq -r '.metadata.namespace')/quarkus-api-example
+        podman build -f src/main/docker/Dockerfile.jvm -t "${IMAGE}" .
       group:
         kind: build
   - id: loginlocalregistry
@@ -99,7 +101,9 @@ commands:
       label: "Push Image"
       component: tools
       workingDir: ${PROJECT_SOURCE}
-      commandLine: "podman push --tls-verify=false image-registry.openshift-image-registry.svc:5000/openshift/quarkus-api-example"
+      commandLine: |
+        IMAGE=image-registry.openshift-image-registry.svc:5000/$(kubectl get sa default -o json | jq -r '.metadata.namespace')/quarkus-api-example
+        podman push --tls-verify=false "${IMAGE}"
       group:
         kind: build
   - id: startdev
