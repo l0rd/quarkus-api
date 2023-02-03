@@ -14,28 +14,23 @@ components:
       endpoints:
         - exposure: none
           name: debug
-          protocol: tcp
+          protocol: http
           targetPort: 5005
         - exposure: none
-          name: test
+          name: test1
+          protocol: http
+          targetPort: 8081
+        - exposure: none
+          name: test2
           protocol: tcp
           targetPort: 1593
         - exposure: public
           name: list-all-food
           protocol: http
           targetPort: 8080
-          path: /food
+          # path: /food
       memoryLimit: 6G
       cpuLimit: 1500m
-      mountSources: true
-
-  - name: ubi-minimal
-    container:
-      image: registry.access.redhat.com/ubi8/ubi-minimal
-      command: ['tail']
-      args: ['-f', '/dev/null']
-      memoryLimit: 64M
-      mountSources: true
 
   - name: postgresql
     container:
@@ -53,67 +48,50 @@ components:
 commands:
   - id: package
     exec:
-      label: "Package"
+      label: "1. Package"
       component: tools
-      workingDir: ${PROJECT_SOURCE}
       commandLine: "./mvnw clean package -DskipTests=true -Dquarkus.profile=staging"
       group:
         kind: build
         isDefault: true
-  - id: runtests
-    exec:
-      label: "Run tests"
-      component: tools
-      workingDir: ${PROJECT_SOURCE}
-      commandLine: "./mvnw test"
-      group:
-        kind: test
-  - id: packagenative
 
-
-    exec:
-      label: "Package Native"
-      component: tools
-      workingDir: ${PROJECT_SOURCE}
-      commandLine: "./mvnw package -Dnative -Dmaven.test.skip -Dquarkus.native.native-image-xmx=3G  -Dquarkus.profile=staging"
-      group:
-        kind: build
-  - id: buildimage
-    exec:
-      label: "Build Image"
-      component: tools
-      workingDir: ${PROJECT_SOURCE}
-      commandLine: |
-        IMAGE=image-registry.openshift-image-registry.svc:5000/$(kubectl get sa default -o json | jq -r '.metadata.namespace')/quarkus-api-example
-        podman build -f src/main/docker/Dockerfile.jvm -t "${IMAGE}" .
-      group:
-        kind: build
-  - id: pushimage
-    exec:
-      label: "Push Image"
-      component: tools
-      workingDir: ${PROJECT_SOURCE}
-      commandLine: |
-        # Requires `oc policy add-role-to-user registry-editor <user_name>`
-        IMAGE=image-registry.openshift-image-registry.svc:5000/$(kubectl get sa default -o json | jq -r '.metadata.namespace')/quarkus-api-example
-        podman login --tls-verify=false -u $(oc whoami) -p $(oc whoami -t) image-registry.openshift-image-registry.svc:5000
-        podman push --tls-verify=false "${IMAGE}"
-      group:
-        kind: build
   - id: startdev
     exec:
-      label: "Start Development mode (Hot reload + debug)"
+      label: "2. Start Development mode (Hot reload + debug)"
       component: tools
-      workingDir: ${PROJECT_SOURCE}
       commandLine: "./mvnw compile quarkus:dev"
       group:
         kind: run
         isDefault: true
-  - id: startnative
+
+  - id: buildimage
     exec:
-      label: "Start Native"
-      component: ubi-minimal
-      workingDir: ${PROJECT_SOURCE}/target
-      commandLine: "./quarkus-api-example-1.0.0-SNAPSHOT-runner"
+      label: "3. Build Image"
+      component: tools
+      commandLine: |
+        # IMAGE=image-registry.openshift-image-registry.svc:5000/$(kubectl get sa default -o json | jq -r '.metadata.namespace')/quarkus-api-example
+        IMAGE=image-registry.openshift-image-registry.svc:5000/openshift/quarkus-api-example
+        podman build -f src/main/docker/Dockerfile.jvm -t "${IMAGE}" .
+      group:
+        kind: build
+
+  - id: pushimage
+    exec:
+      label: "4. Push Image"
+      component: tools
+      commandLine: |
+        # Requires `oc policy add-role-to-user registry-editor <user_name> -n openshift`
+        # IMAGE=image-registry.openshift-image-registry.svc:5000/$(kubectl get sa default -o json | jq -r '.metadata.namespace')/quarkus-api-example
+        IMAGE=image-registry.openshift-image-registry.svc:5000/openshift/quarkus-api-example
+        podman login --tls-verify=false -u $(oc whoami) -p $(oc whoami -t) image-registry.openshift-image-registry.svc:5000
+        podman push --tls-verify=false "${IMAGE}"
+      group:
+        kind: build
+
+  - id: apply
+    exec:
+      label: "5. Deploy application"
+      component: tools
+      commandLine: oc apply -f template/app.yaml
       group:
         kind: run
