@@ -1,0 +1,9 @@
+schemaVersion: 2.1.0
+metadata:
+  generateName: quarkus-api-example-demo
+components:
+  - name: tools
+    container:
+      image: quay.io/devfile/universal-developer-image:ubi8-latest
+      memoryLimit: 6G
+      cpuLimit: 1500m
