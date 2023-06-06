@@ -4,7 +4,7 @@
 
 [![Contribute (ephemeral)](https://img.shields.io/static/v1?label=Dev%20Spaces&message=...?storageType=ephemeral&logo=eclipseche&color=FDB940&labelColor=525C86)](https://workspaces.openshift.com#https://github.com/l0rd/quarkus-api-example?storageType=ephemeral) -->
 
-[![Contribute (IntelliJ)](https://img.shields.io/static/v1?label=Dev%20Spaces&message=...%26editor=intellij&logo=eclipseche&color=FDB940&labelColor=525C86)](https://workspaces.openshift.com#https://github.com/l0rd/quarkus-api-example?storageType=ephemeral&che-editor=che-incubator/intellij/latest)
+[![Contribute (IntelliJ)](https://img.shields.io/static/v1?label=Dev%20Spaces&message=...%26editor=intellij&logo=eclipseche&color=FDB940&labelColor=525C86)](https://workspaces.openshift.com#https://github.com/l0rd/quarkus-api-example?storageType=ephemeral&che-editor=che-incubator/che-idea/latest)
 
 <!-- [![Contribute (devfile branch)](https://img.shields.io/static/v1?label=Dev%20Spaces&message=%23github.com/l0rd/quarkus-api-example/tree/devfile&logo=eclipseche&color=FDB940&labelColor=525C86)](https://workspaces.openshift.com#https://github.com/l0rd/quarkus-api-example/tree/devspaces-devfile&storageType=ephemeral) -->
 
