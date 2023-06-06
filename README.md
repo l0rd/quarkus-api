@@ -1,12 +1,12 @@
 # Quarkus API example
 
-[![Contribute (ephemeral)](https://img.shields.io/static/v1?label=Dev%20Spaces&message=%23github.com/l0rd/quarkus-api-example&logo=eclipseche&color=FDB940&labelColor=525C86)](https://devspaces.apps.mloriedo-devworkspaces.devcluster.openshift.com#https://github.com/l0rd/quarkus-api-example)
+<!-- [![Contribute](https://img.shields.io/static/v1?label=Dev%20Spaces&message=%23github.com/l0rd/quarkus-api-example&logo=eclipseche&color=FDB940&labelColor=525C86)](https://workspaces.openshift.com#https://github.com/l0rd/quarkus-api-example)
 
-[![Contribute (ephemeral)](https://img.shields.io/static/v1?label=Dev%20Spaces&message=...?storageType=ephemeral&logo=eclipseche&color=FDB940&labelColor=525C86)](https://devspaces.apps.mloriedo-devworkspaces.devcluster.openshift.com#https://github.com/l0rd/quarkus-api-example?storageType=ephemeral)
+[![Contribute (ephemeral)](https://img.shields.io/static/v1?label=Dev%20Spaces&message=...?storageType=ephemeral&logo=eclipseche&color=FDB940&labelColor=525C86)](https://workspaces.openshift.com#https://github.com/l0rd/quarkus-api-example?storageType=ephemeral) -->
 
-[![Contribute (IntelliJ)](https://img.shields.io/static/v1?label=Dev%20Spaces&message=...%26editor=intellij&logo=eclipseche&color=FDB940&labelColor=525C86)](https://devspaces.apps.mloriedo-devworkspaces.devcluster.openshift.com#https://github.com/l0rd/quarkus-api-example?storageType=ephemeral&che-editor=https://gist.githubusercontent.com/l0rd/4ffacdd0f5e002ee8692e0c99710afd6/raw/92f84184b996f7008ba379961dd1290904bc9def/intellij-low-cpu-devfile.yaml)
+[![Contribute (IntelliJ)](https://img.shields.io/static/v1?label=Dev%20Spaces&message=...%26editor=intellij&logo=eclipseche&color=FDB940&labelColor=525C86)](https://workspaces.openshift.com#https://github.com/l0rd/quarkus-api-example?storageType=ephemeral&che-editor=che-incubator/intellij/latest)
 
-[![Contribute (devfile branch)](https://img.shields.io/static/v1?label=Dev%20Spaces&message=%23github.com/l0rd/quarkus-api-example/tree/devfile&logo=eclipseche&color=FDB940&labelColor=525C86)](https://devspaces.apps.mloriedo-devworkspaces.devcluster.openshift.com#https://github.com/l0rd/quarkus-api-example/tree/devspaces-devfile&storageType=ephemeral)
+<!-- [![Contribute (devfile branch)](https://img.shields.io/static/v1?label=Dev%20Spaces&message=%23github.com/l0rd/quarkus-api-example/tree/devfile&logo=eclipseche&color=FDB940&labelColor=525C86)](https://workspaces.openshift.com#https://github.com/l0rd/quarkus-api-example/tree/devspaces-devfile&storageType=ephemeral) -->
 
 Quarkus REST API with Hibernate ORM, Panache, RESTEasy, and PostgreSQL. Requires JDK 11.
 
