@@ -1,6 +1,6 @@
-schemaVersion: 2.1.0
+schemaVersion: 2.2.0
 metadata:
-  generateName: quarkus-api-example-demo
+  name: quarkus-api-example-demo
 components:
   - name: tools
     container:
